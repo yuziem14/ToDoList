@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        include _head
+        
+        title To Do List
+    body
+        .container
+            if session.user !== undefined
+                include _authUser
+
+            include _header
+
+            block content
+
+            include _footer
