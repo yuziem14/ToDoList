@@ -1,13 +1,15 @@
+/* eslint-disable no-undef */
 const path = require('path');
 const express = require('express');
-const auth = require('./Controllers/AuthController');
+const authController = require('./Controllers/AuthController');
+const authRouter = require('./Routes/AuthRoutes');
 
 app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(auth.startSession);
-app.use(auth.viewsSession);
+app.use(authController.startSession);
+app.use(authController.viewsSession);
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'Views'));
@@ -17,11 +19,7 @@ app.set('views', path.join(__dirname, 'Views'));
     ---------------------------------------------------- 
 */
 
-app.get('/', (req, res) => {
-  // res.writeHead(200, { 'Content-type': 'text/html' });
-  // res.end('<h1>To Do List | Express Node.js</h1>');
-  res.status(200).render('Auth/login');
-});
+app.use('/', authRouter);
 
 const port = 5500;
 app.listen(port, () => {

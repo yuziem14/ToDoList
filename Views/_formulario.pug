@@ -1,0 +1,24 @@
+.form-group
+  label(for='name') Nome
+  input.form-control#name(type='text' name='name' value=usuario.name)
+  if errors && errors.name.length > 0
+    each e in erros.name
+      small.form-text.text-danger= e
+.form-group
+  label(for='email') Email
+  input.form-control#email(type='email' name='email' value=usuario.email)
+  if errors && errors.email.length > 0
+    each e in errors.email
+      small.form-text.text-danger= e
+.form-group
+  label(for='password') Senha
+  input.form-control#password(type='password' name='password')
+  if errors && errors.password.length > 0
+    each e in errors.password
+      small.form-text.text-danger= e
+.form-group
+  label(for='confirmPass') Confirme a Senha
+  input.form-control#confirmPass(type='password' name='confirmPass')
+  if errors && errors.confirmPass.length > 0
+    each e in errors.confirmPass
+      small.form-text.text-danger= e
