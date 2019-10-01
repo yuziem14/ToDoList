@@ -1,8 +1,10 @@
 extends ../base
 
 block content
-    .row.justify-content-center
+    .row.justify-content-center.mb-3
         .col-lg-4
+            if message
+                .alert.alert-success= message
             form(action=`/tasks/${task.id}/edit` method="POST")
                 include _form
                 .btn-group(role='group')

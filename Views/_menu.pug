@@ -1,6 +1,6 @@
 nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
     .container.d-flex.justify-content-between
-        a.navbar-brand(href="#") To Do List
+        a.navbar-brand(href="/") To Do List
         button.navbar-toggler(type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Alterna navegação")
             span.navbar-toggler-icon
             
@@ -8,11 +8,14 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
             ul.navbar-nav.mr-auto
                 li.nav-item.active
                     if session.user !== undefined
-                        a.nav-link(href="/tasks") Tasks
+                        a.nav-link(href="/tasks") Tarefas
                     else
                         a.nav-link(href="/login") Login
                 li.nav-item.active
                     if session.user !== undefined
                         a.nav-link(href="/logout") Logout
                     else
-                        a.nav-link(href="/register") Register
+                        a.nav-link(href="/register") Registre-se
+
+        if session.user !== undefined
+                include _authUser

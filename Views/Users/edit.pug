@@ -4,5 +4,5 @@ block conteudo
   .row.justify-content-center
     .col-lg-4
       form(action=`/user/${session.user.id}/edit` method='post')
-        include ../_form
+        include ../Auth/_form
         button.btn.btn-primary(type='submit') Atualizar

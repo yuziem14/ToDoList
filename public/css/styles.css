@@ -1,3 +1,32 @@
 body {
-    padding-top: 70px;
+  padding-top: 70px;
+}
+
+.jumbotron {
+  background-color: #1e272e;
+}
+
+.jumbotron > * {
+  color: #fff;
+}
+
+.__profile {
+  background-color: #ffa801;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 1px 5px;
+  border-radius: 10px;
+}
+
+.__profile-name {
+  font-size: 14px;
+  margin-right: 3px;
+}
+
+.__profile-image {
+  width: 36px;
+  border: none;
+  border-radius: 50%;
+  border: solid 1px #000;
 }

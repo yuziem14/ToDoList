@@ -1,10 +1,10 @@
 extends ../base
 
 block content
-    .row.justify-content-center
+    .row.justify-content-center.mb-3
         .col-lg-4
             form(action='/register' method='POST')
-                include ../_form
+                include _form
                 .btn-group(role='group')
                     button.btn.btn-success(type='submit') Registrar 
                     button.btn.btn-danger(type='reset') Limpar

@@ -19,7 +19,9 @@ exports.allowAccess = (req, res, next) => {
 };
 
 exports.viewLogin = (req, res) => {
-  res.status(200).render('Auth/login', { title: 'Login' });
+  if (req.session.user !== undefined) return res.redirect('/tasks');
+
+  res.status(200).render('Auth/login', { title: 'Login', email: '' });
 };
 
 exports.login = (req, res) => {
@@ -34,7 +36,7 @@ exports.login = (req, res) => {
   if (!user) {
     view = 'Auth/login';
     message = 'Email ou senha inválidos!';
-    res.status(401).render(view, { title: 'Login', message });
+    res.status(401).render(view, { title: 'Login', message, email });
   } else {
     user = usersModel.readUserJSON(user.id);
     req.session.user = user;

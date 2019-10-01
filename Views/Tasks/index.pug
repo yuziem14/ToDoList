@@ -3,15 +3,15 @@ extends ../base
 block content
     .row.justify-content-center
         .col-lg-8
-            h1 Your Tasks
+            h1 Tarefas de #{session.user.name}
             if session.user.tasks.length === 0
-                p You Dont Have Any Task
+                p Você nao tem nenhuma tarefa
             else
                 ul.list-group.mt-3
                     each task in tasks.notConcluded
                         li.list-group-item.d-flex.justify-content-between
                             .custom-control.custom-checkbox
-                                input.custom-control-input(id=`checkbox-${task.id}` onchange=`window.location.href="/tasks/${task.id}/concluded"` type="checkbox")
+                                input.custom-control-input.check-task(id=`checkbox-${task.id}` type="checkbox" data-task=task.id)
                                 label.custom-control-label(for=`checkbox-${task.id}`)= task.title
                             .btn-group
                                 a.btn.btn-primary(href=`/tasks/${task.id}/show`)
@@ -24,7 +24,7 @@ block content
                     each task in tasks.concluded
                         li.list-group-item.list-group-item-danger.d-flex.justify-content-between
                             .custom-control.custom-checkbox
-                                input.custom-control-input(id=`checkbox-${task.id}` onchange=`window.location.href="/tasks/${task.id}/concluded"` checked type="checkbox")
+                                input.custom-control-input.check-task(id=`checkbox-${task.id}` data-task=task.id checked type="checkbox")
                                 label.custom-control-label(for=`checkbox-${task.id}`)
                                     strike.text-danger= task.title
                             .btn-group
@@ -32,4 +32,4 @@ block content
                                     i.fas.fa-eye
                                 a.btn.btn-danger(href=`/tasks/${task.id}/delete`)
                                     i.fas.fa-trash-alt
-            a.btn.btn-success.mb-3(href="/tasks/store" role="button")  Add a new task
+            a.btn.btn-success.mb-3(href="/tasks/store" role="button")  Criar nova tarefa
