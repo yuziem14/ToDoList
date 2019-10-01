@@ -6,5 +6,6 @@ block content
             form(action=`/tasks/${task.id}/edit` method="POST")
                 include _form
                 .btn-group(role='group')
+                    a.btn.btn-primary(role='button' href='/tasks') Voltar
                     button.btn.btn-success(type='submit') Atualizar 
                     button.btn.btn-danger(type='reset') Limpar

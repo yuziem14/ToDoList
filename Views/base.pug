@@ -5,10 +5,11 @@ html(lang="en")
         
         title To Do List - #{title}
     body
+        include _menu
         .container
             if session.user !== undefined
                 include _authUser
-
+            
             include _header
 
             block content
