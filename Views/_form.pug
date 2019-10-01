@@ -1,12 +1,12 @@
 .form-group
   label(for='name') Nome
-  input.form-control#name(type='text' name='name' value=usuario.name)
+  input.form-control#name(type='text' name='name' value=user.name)
   if errors && errors.name.length > 0
-    each e in erros.name
+    each e in errors.name
       small.form-text.text-danger= e
 .form-group
   label(for='email') Email
-  input.form-control#email(type='email' name='email' value=usuario.email)
+  input.form-control#email(type='email' name='email' value=user.email)
   if errors && errors.email.length > 0
     each e in errors.email
       small.form-text.text-danger= e

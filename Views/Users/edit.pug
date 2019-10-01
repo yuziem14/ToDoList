@@ -3,6 +3,6 @@ extends ../base
 block conteudo
   .row.justify-content-center
     .col-lg-4
-      form(action=`/usuario/${session.usuario.id}/editar` method='post')
-        include ../autenticacao/_formulario
+      form(action=`/user/${session.user.id}/edit` method='post')
+        include ../_form
         button.btn.btn-primary(type='submit') Atualizar

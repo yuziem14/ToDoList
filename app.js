@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const authController = require('./Controllers/AuthController');
 const authRouter = require('./Routes/AuthRoutes');
+const taskRouter = require('./Routes/TaskRoutes');
 
 app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -20,6 +21,7 @@ app.set('views', path.join(__dirname, 'Views'));
 */
 
 app.use('/', authRouter);
+app.use('/tasks', taskRouter);
 
 const port = 5500;
 app.listen(port, () => {

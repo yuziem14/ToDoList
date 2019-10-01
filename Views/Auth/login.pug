@@ -3,14 +3,14 @@ extends ../base
 block content
     .row.justify-content-center
         .col-lg-4
-            if mensagem
-                .alert.alert-danger= mensagem
-            form(action='/login' method='post')
+            if message
+                .alert.alert-danger= message
+            form(action='/login' method='POST')
                 .form-group
                     label(for='email') Email
                     input.form-control#email(type='email' name='email')
                     small.form-text.text-muted Igual ao seu cadastro.
                 .form-group
-                    label(for='senha') Senha
-                    input.form-control#senha(type='password' name='senha')
+                    label(for='password') Senha
+                    input.form-control#senha(type='password' name='password')
                 button.btn.btn-primary(type='submit') Login

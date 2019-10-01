@@ -3,8 +3,8 @@ extends ../base
 block content
     .row.justify-content-center
         .col-lg-4
-            form(action='/register' method='POST')
-                include ../_form
+            form(action="/tasks/store" method="POST")
+                include _form
                 .btn-group(role='group')
                     button.btn.btn-success(type='submit') Registrar 
                     button.btn.btn-danger(type='reset') Limpar

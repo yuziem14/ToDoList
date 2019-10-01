@@ -22,7 +22,8 @@ exports.validate = (name, email, password, confirmPass, edit = false) => {
     email: [],
     password: [],
     confirmPass: [],
-    errors: function() {
+    // eslint-disable-next-line prettier/prettier
+    errors: function () {
       return (
         this.name.length > 0 ||
         this.email.length > 0 ||
@@ -62,6 +63,12 @@ exports.validate = (name, email, password, confirmPass, edit = false) => {
   }
 
   return errors;
+};
+
+exports.saveUserJSON = (user, callback) => {
+  const file = path.join(usersFiles, `user-${user.id}.json`);
+  const userString = JSON.stringify(user);
+  fs.writeFile(file, userString, 'utf-8', callback);
 };
 
 exports.saveJSON = (user, callback) => {
