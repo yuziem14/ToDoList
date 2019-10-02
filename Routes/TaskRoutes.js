@@ -7,18 +7,18 @@ const { allowAccess } = require('../Controllers/AuthController');
 const router = express.Router();
 
 /*  ----------------------------------------------------
-                Taks Routes
+                    Tasks Routes
     ----------------------------------------------------
 */
 
 router
     .get('/', allowAccess, taskController.viewIndex)
-    .get('/:id/show', allowAccess, taskController.showTask)
-    .get('/store', allowAccess, taskController.viewStore)
-    .post('/store', allowAccess, taskController.store)
+    .get('/new', allowAccess, taskController.viewStore)
+    .post('/new', allowAccess, taskController.store)
     .get('/:id/edit', allowAccess, taskController.viewEdit)
     .post('/:id/edit', allowAccess, taskController.edit)
     .get('/:id/concluded', allowAccess, taskController.taskConcluded)
-    .get('/:id/delete', allowAccess, taskController.delete);
+    .get('/:id/delete', allowAccess, taskController.delete)
+    .get('/:id', allowAccess, taskController.showTask);
 
 module.exports = router;

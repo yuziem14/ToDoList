@@ -1,0 +1,20 @@
+mixin task(task)
+    - let liClass = '';
+    if task.concluded
+        - liClass = 'list-group-item-danger';
+    li.list-group-item.d-flex.justify-content-between(class=liClass)
+        .custom-control.custom-checkbox
+            input.custom-control-input.check-task(data-task=task.id type="checkbox" id=`checkbox-${task.id}` checked=(task.concluded ? "checked" : undefined))
+            if !task.concluded
+                label.custom-control-label(for=`checkbox-${task.id}`)= task.title
+            else
+                label.custom-control-label(for=`checkbox-${task.id}`)
+                    strike.text-danger= task.title 
+        .btn-group
+            a.btn.btn-primary(href=`/tasks/${task.id}`)
+                i.fas.fa-eye
+            if !task.concluded
+                a.btn.btn-secondary(href=`/tasks/${task.id}/edit`)
+                    i.fas.fa-edit
+            a.btn.btn-danger(href=`/tasks/${task.id}/delete`)
+                i.fas.fa-trash-alt

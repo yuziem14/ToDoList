@@ -5,18 +5,8 @@ const tasksModel = require('../Models/Tasks');
 const usersModel = require('../Models/Users');
 
 exports.viewIndex = (req, res) => {
-  const tasks = {
-    concluded: [],
-    notConcluded: []
-  };
-
-  let userTasks = req.session.user.tasks.slice();
-  userTasks = userTasks.sort((task1, task2) => task2.id - task1.id);
-
-  userTasks.forEach(t => {
-    if (t.concluded === true) tasks.concluded.push(t);
-    else tasks.notConcluded.push(t);
-  });
+  const tasks = req.session.user.tasks.slice();
+  tasks.sort((task1, task2) => task2.id - task1.id);
 
   res.status(200).render('Tasks/index', { title: 'Tasks', tasks });
 };
@@ -27,7 +17,7 @@ exports.showTask = (req, res) => {
 
   const task = user.tasks.find(t => t.id === id);
 
-  if (task === undefined) {
+  if (!task) {
     return res.redirect('/404');
   }
 
@@ -47,7 +37,7 @@ exports.store = (req, res) => {
   if (errors.errors()) {
     view = 'Tasks/store';
     json.title = 'New Task';
-    json.task = { description, title };
+    json.task = { title, description };
     json.errors = errors;
 
     res.status(401).render(view, json);
@@ -57,7 +47,7 @@ exports.store = (req, res) => {
 
     const { user } = req.session;
     const newTask = {
-      id: tasksModel.lastId(req.session.user) + 1,
+      id: tasksModel.lastId(user.tasks) + 1,
       title: title,
       description: description,
       concluded: false
@@ -76,7 +66,7 @@ exports.viewEdit = (req, res) => {
   const id = req.params.id * 1;
   const task = req.session.user.tasks.find(t => t.id === id);
 
-  if (id === undefined || task === undefined || task.concluded)
+  if (!id || !task || task.concluded)
     return res.redirect('/tasks');
 
   res.status(200).render('Tasks/edit', { title: 'Edit Task', task });
@@ -87,7 +77,7 @@ exports.edit = (req, res) => {
   const { user } = req.session;
   const task = user.tasks.find(t => t.id === id);
 
-  if (id === undefined || task === undefined || task.concluded === true)
+  if (!id || !task || task.concluded)
     return res.redirect('/404');
 
   const { title, description } = req.body;
@@ -117,7 +107,7 @@ exports.taskConcluded = (req, res) => {
   const { user } = req.session;
   const task = user.tasks.find(t => t.id === id);
 
-  if (task === undefined) return res.redirect('/404');
+  if (!task) return res.redirect('/404');
 
   const taskIndex = user.tasks.indexOf(task);
   user.tasks[taskIndex].concluded = !user.tasks[taskIndex].concluded;
@@ -133,7 +123,7 @@ exports.delete = (req, res) => {
   const { user } = req.session;
   const task = user.tasks.find(t => t.id === id);
 
-  if (task !== undefined) {
+  if (task) {
     const taskIndex = user.tasks.indexOf(task);
     user.tasks.splice(taskIndex, 1);
     usersModel.saveUserJSON(user, err => {

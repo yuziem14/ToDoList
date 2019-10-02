@@ -2,5 +2,5 @@
     .__profile
         h3.__profile-name= session.user.name
         img(src="/images/user-male.svg").__profile-image
-    a.btn.btn-primary(href="/").ml-1
-        i.fas.fa-user-edit   
+    a.btn.btn-primary(href=`/users/${session.user.id}/edit`).ml-1
+        i.fas.fa-user-edit

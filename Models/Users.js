@@ -74,7 +74,6 @@ exports.saveUserJSON = (user, callback) => {
 exports.saveJSON = (user, callback) => {
   const file = path.join(usersFiles, `user-${user.id}.json`);
 
-  users.push({ id: user.id, email: user.email, password: user.password });
   fs.writeFile(
     path.join(usersFiles, 'users.json'),
     JSON.stringify(users),

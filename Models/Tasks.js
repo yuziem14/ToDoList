@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-exports.lastId = user => {
+exports.lastId = tasks => {
     let id = -1;
-    user.tasks.forEach(t => {
+    tasks.forEach(t => {
         // eslint-disable-next-line prefer-destructuring
         if (t.id > id) id = t.id;
     });

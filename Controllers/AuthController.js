@@ -19,7 +19,7 @@ exports.allowAccess = (req, res, next) => {
 };
 
 exports.viewLogin = (req, res) => {
-  if (req.session.user !== undefined) return res.redirect('/tasks');
+  if (req.session.user) return res.redirect('/tasks');
 
   res.status(200).render('Auth/login', { title: 'Login', email: '' });
 };
@@ -54,7 +54,7 @@ exports.register = (req, res) => {
 
   const errors = usersModel.validate(name, email, password, confirmPass);
 
-  if (errors.errors() === true) {
+  if (errors.errors()) {
     view = 'Auth/register';
     res
       .status(401)
@@ -68,12 +68,16 @@ exports.register = (req, res) => {
       tasks: []
     };
 
+    usersModel.users.push({
+      id: user.id,
+      email: user.email,
+      password: user.password
+    });
+
     usersModel.saveJSON(user, err => {
       if (err) throw err;
-
-      view = 'Tasks/index';
       req.session.user = user;
-      res.status(200).render(view, { title: 'Tasks' });
+      return res.redirect('/tasks');
     });
   }
 };
